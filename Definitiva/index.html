@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax ejercicio Alumnos</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000000;
+        }
+ 
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+ 
+        #parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+ 
+        #layer1 {
+            /*Debe de tenerlo cada imagen*/position: absolute;
+            z-index: 1;
+            /* El más bajo el del fondo*/
+            background-image: url('rutaDeLaImgFondo');
+            top: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+ 
+       
+        #layer2 {
+            /*Debe de tenerlo cada imagen para ver el órden de las capas*/z-index: 3;
+            /* Medio */
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+ 
+       
+        #layer3 {
+            /* El más alto */
+            position: absolute;
+            z-index: 3;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+ 
+       
+        #layer4 {
+            position: absolute;
+            z-index: 4;
+            top: 460px;
+            left: 0;
+            width: 100%;
+            height: 50%;
+        }
+ 
+        .completo {
+            width: 100%;
+            height: 100%;
+        }
+ 
+        /* --- Contenido (Debajo del Parallax) --- */
+        .contenido {
+            padding: 50px 20px;
+            background-color: #000000;
+            text-align: center;
+            min-height: 500px;
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div id="parallax-container">
+ 
+        <div id="layer1">
+            <img src="Capa 1.png" alt="capa1">
+        </div>
+ 
+        <div id="layer2">
+            <img src="Capas2.png">
+        </div>
+ 
+        <div id="layer3">
+            <img class="completo" src="Capas3.png">
+        </div>
+ 
+        <div id="layer4">
+            <img class="completo" src="Capas4.png">
+        </div>
+ 
+    </div>
+
+    <section class="contenido">
+       
+    </section>
+
+    <script>
+       
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const layer1 = document.getElementById('layer1');
+            const layer2 = document.getElementById('layer2');
+            const layer3 = document.getElementById('layer3');
+            const layer4 = document.getElementById('layer4');
+            const container = document.getElementById('parallax-container');
+ 
+            const speed1 = 0.4;
+            const speed2 = 0.2;
+            const speed3 = 0.1;
+            const speed4 = 0.1;
+ 
+             function updateParallax() {
+
+                const scrollOffset = container.getBoundingClientRect().top;
+ 
+                layer1.style.transform = `translate3d(0, ${scrollOffset * speed1}px, 0)`;
+                layer2.style.transform = `translate3d(0, ${scrollOffset * speed2}px, 0)`;
+                layer3.style.transform = `translate3d(0, ${scrollOffset * speed3}px, 0)`;
+                layer4.style.transform = `translate3d(0, ${scrollOffset * speed4}px, 0)`;
+ 
+            }
+            
+            window.addEventListener('scroll', updateParallax);
+            window.addEventListener('resize', updateParallax);
+ 
+            updateParallax();
+        });
+    </script>
+</body>
+ 
+</html>
